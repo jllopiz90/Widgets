@@ -1,5 +1,29 @@
 import StatsIndicator from './components/StatsIndicator';
 import { CursorClickIcon } from '@heroicons/react/outline'
+import RadioGroup from './components/RadioGroup';
+
+const plans = [
+  {
+    label: "Startup",
+    description: (
+        <>
+            <span>
+                12GB / 6 CPUs
+            </span>{" "}
+            <span aria-hidden="true">&middot;</span>{" "}
+            <span>160 GB SSD disk</span>
+        </>
+    ),
+  },
+  {
+    label: "Business",
+    description: "16GB",
+  },
+  {
+    label: "Enterprise",
+    description: "32GB 12 CPUs 1024 GB SSD disk",
+  },
+];
 
 function App() {
   return (
@@ -13,6 +37,12 @@ function App() {
           iconBGColorClass="bg-green-500"
           trend={{change: '14%', type: 'increase'}}
          />
+      </div>
+      <div className="mt-10 w-80">
+        <RadioGroup 
+          elements={plans}
+          srOnlyText="Server size"
+        />
       </div>
     </div>
   );
