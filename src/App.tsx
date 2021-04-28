@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import StatsIndicator from './components/StatsIndicator';
+import { CursorClickIcon } from '@heroicons/react/outline'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col justify-center items-center py-10 bg-gray-500">
+      <span className="text-green-400 text-2xl font-bold">Widgets examples</span>
+      <div className="mt-10 w-64">
+        <StatsIndicator
+          name="Total Subscribers"
+          stat="71,897"
+          icon={CursorClickIcon}
+          iconBGColorClass="bg-green-500"
+         />
+      </div>
     </div>
   );
 }
