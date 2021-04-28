@@ -11,6 +11,7 @@ function App() {
           stat="71,897"
           icon={CursorClickIcon}
           iconBGColorClass="bg-green-500"
+          trend={{change: '14%', type: 'increase'}}
          />
       </div>
     </div>

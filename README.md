@@ -1,4 +1,4 @@
-# Introduction DataGrid Component
+# Introduction UI Widgets Components
 
 A small collection of UI widgets created with react, typescript and tailwindcss.
 
