@@ -27,15 +27,25 @@ const CheckIcon = (props: any) => (
   </svg>
 );
 
-export function RadioGroupComponent({ elements, srOnlyText, activeBgColor = 'bg-royal-blue-500', verticalRemPadding = 0, horizontalRemPadding = 0 }: RadioGroupProps) {
+export const RadioGroupComponent = ({
+  elements,
+  srOnlyText,
+  activeBgColor = "bg-royal-blue-500",
+  verticalRemPadding = 0,
+  horizontalRemPadding = 0,
+}: RadioGroupProps) => {
   const [selected, setSelected] = useState(elements[0]);
 
   return (
-    <div className={`w-full px-${horizontalRemPadding} py-${verticalRemPadding}`}>
+    <div
+      className={`w-full px-${horizontalRemPadding} py-${verticalRemPadding}`}
+    >
       <div className="w-full max-w-md mx-auto">
         <RadioGroup value={selected} onChange={setSelected}>
           {srOnlyText && (
-            <RadioGroup.Label className="sr-only">{srOnlyText}</RadioGroup.Label>
+            <RadioGroup.Label className="sr-only">
+              {srOnlyText}
+            </RadioGroup.Label>
           )}
           <div className="space-y-2">
             {elements.map((element) => (
@@ -94,6 +104,6 @@ export function RadioGroupComponent({ elements, srOnlyText, activeBgColor = 'bg-
       </div>
     </div>
   );
-}
+};
 
 export default RadioGroupComponent;
