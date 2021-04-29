@@ -1,5 +1,4 @@
 import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/solid";
-import { classNames } from '../utils/utils';
 interface Trend {
   type: "increase" | "decrease";
   change: string;
@@ -13,6 +12,10 @@ interface StatsIndicatorProps {
   iconColor?: string;
   trend?: Trend;
   change?: string;
+}
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
 }
 
 const StatsIndicator = ({ name, stat, icon: Icon, trend, iconColor = '#ffffff', iconBGColorClass = "bg-indigo-500" }: StatsIndicatorProps) => {
