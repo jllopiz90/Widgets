@@ -84,3 +84,44 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
     ```
 
    <img width="394" alt="Screen Shot 2021-04-28 at 7 56 35 PM" src="https://user-images.githubusercontent.com/17462829/116487106-3801d080-a85d-11eb-9791-e5e57168a957.png">
+
+1. `Modal`: Component to display a modal dialog with info.
+    *Props:
+
+    ```typescript
+    interface ModalProps {
+    open: boolean;
+    title?: string;
+    content?: string | JSX.Element;
+    dismissText?: string;
+    closeModal: () => void;
+    }
+    ```
+
+    *Example:
+
+    ```typescript
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    const openModal = () => setOpen(true);
+
+    <>
+        <button
+          type="button"
+          onClick={openModal}
+          className="px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        >
+          Open dialog
+        </button>
+        {open && (
+          <Modal
+            closeModal={closeModal}
+            open={open}
+            content="Your payment has been successfully submitted. We’ve sent
+                    your an email with all of the details of your order."
+            title="Payment successful"
+            dismissText="Got it, thanks"
+          />
+        )}
+    </>
+    ```
