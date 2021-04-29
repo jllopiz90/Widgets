@@ -125,3 +125,23 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
         )}
     </>
     ```
+
+    1. `Pagination`: Component to navigate through pages.
+        *Props:
+
+        ```typescript
+        interface PaginationProps {
+            page: number; //current page
+            total: number; //total number of pages
+            setPage: React.Dispatch<React.SetStateAction<number>>; //function to update current page
+        }
+        ```
+
+        *Example:
+
+        ```typescript
+        const [page, setPage] = useState(1);
+        
+        <Pagination page={page} total={9} setPage={setPage} />
+        ```
+        

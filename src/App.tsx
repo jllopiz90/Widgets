@@ -2,6 +2,7 @@ import { useState } from "react";
 import StatsIndicator from "./components/StatsIndicator";
 import RadioGroup from "./components/RadioGroup";
 import Modal from "./components/Modal";
+import Pagination from "./components/Pagination";
 import { CursorClickIcon } from "@heroicons/react/outline";
 
 const plans = [
@@ -26,6 +27,7 @@ const plans = [
 
 function App() {
   const [open, setOpen] = useState(false);
+  const [page, setPage] = useState(1);
   const closeModal = () => setOpen(false);
   const openModal = () => setOpen(true);
 
@@ -64,6 +66,9 @@ function App() {
             dismissText="Got it, thanks"
           />
         )}
+      </div>
+      <div className="mt-10 w-80 justify-center flex">
+        <Pagination page={page} total={9} setPage={setPage} />
       </div>
     </div>
   );
