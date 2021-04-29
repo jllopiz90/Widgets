@@ -31,7 +31,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
          />
     ```
 
-<img width="292" alt="Screen Shot 2021-04-28 at 5 44 48 PM" src="https://user-images.githubusercontent.com/17462829/116476592-6fff1880-a849-11eb-8694-dc0a440f3ded.png">
+   <img width="292" alt="Screen Shot 2021-04-28 at 5 44 48 PM" src="https://user-images.githubusercontent.com/17462829/116476592-6fff1880-a849-11eb-8694-dc0a440f3ded.png">
 
 1. `RadioGroup`: Component to present some choices to the user to choose 1 among all.
     *Props:
@@ -82,3 +82,5 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
         srOnlyText="Server size"
     />
     ```
+
+   <img width="394" alt="Screen Shot 2021-04-28 at 7 56 35 PM" src="https://user-images.githubusercontent.com/17462829/116487106-3801d080-a85d-11eb-9791-e5e57168a957.png">
