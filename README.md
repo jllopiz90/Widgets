@@ -125,3 +125,5 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
         )}
     </>
     ```
+    
+    <img width="520" alt="Screen Shot 2021-04-29 at 12 23 12 AM" src="https://user-images.githubusercontent.com/17462829/116502559-cdaf5700-a881-11eb-8a21-511199c757dd.png">
