@@ -146,3 +146,5 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
         
         <Pagination page={page} total={9} setPage={setPage} />
         ```
+
+      <img width="437" alt="Screen Shot 2021-04-29 at 10 56 13 AM" src="https://user-images.githubusercontent.com/17462829/116572591-1abf1780-a8da-11eb-8807-3cd65e3b8cf3.png">
