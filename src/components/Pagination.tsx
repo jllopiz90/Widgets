@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowSmLeftIcon, ArrowSmRightIcon } from "@heroicons/react/solid";
 
 interface PaginationProps {
@@ -13,22 +14,31 @@ const Pagination = ({ page, setPage, total }: PaginationProps) => {
   const show1ToRight = () => page < total - 1 && total > 2;
   const show2ToRight = () => page < total - 2 && total > 3;
   const showRightDots = () => page + 2 < total - 1;
+
+  useEffect(() => {
+    console.log("page is:", page);
+  }, [page]);
   return (
     <nav
       className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px ml-10 h-10"
       aria-label="Pagination"
     >
-      {page > 1 && (
-        <span className="relative inline-flex items-center rounded-l-md py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-          <span className="sr-only">Previous</span>
-          <button
-            onClick={() => setPage(page - 1)}
-            className="p-2 focus:outline-none active:bg-gray-300"
-          >
-            <ArrowSmLeftIcon className="w-6 h-6" />
-          </button>
-        </span>
-      )}
+      <span
+        className={`relative inline-flex items-center rounded-l-md py-2 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 ${
+          page > 1 ? "bg-white" : "bg-gray-200"
+        }`}
+      >
+        <span className="sr-only">Previous</span>
+        <button
+          onClick={() => setPage(page - 1)}
+          className="p-2 focus:outline-none active:bg-gray-300"
+          disabled={page === 1}
+        >
+          <ArrowSmLeftIcon
+            className={`w-6 h-6 ${page > 1 ? "text-black" : "text-gray-400"}`}
+          />
+        </button>
+      </span>
       {page > 1 && (
         <button
           onClick={() => setPage(1)}
@@ -90,17 +100,18 @@ const Pagination = ({ page, setPage, total }: PaginationProps) => {
           {total}
         </button>
       )}
-      {page < total && (
-        <span className="relative inline-flex items-center py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-          <span className="sr-only">Next</span>
-          <button
-            onClick={() => setPage(page + 1)}
-            className="p-2 focus:outline-none active:bg-gray-300"
-          >
-            <ArrowSmRightIcon className="w-6 h-6" />
-          </button>
-        </span>
-      )}
+      <span className="relative inline-flex items-center py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+        <span className="sr-only">Next</span>
+        <button
+          onClick={() => setPage(page + 1)}
+          className="p-2 focus:outline-none active:bg-gray-300"
+          disabled={page === total}
+        >
+          <ArrowSmRightIcon
+            className={`w-6 h-6 ${page < total ? "text-black" : "text-gray-400"}`}
+          />
+        </button>
+      </span>
     </nav>
   );
 };
