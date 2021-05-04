@@ -185,3 +185,4 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
         const [selectedValues, setSelectedValues] = useState<OptionValue[]>(['1']);
         <MultiSelect onChange={onMultiSelectChange} options={multiSelectOptions} defaultValues={['1']} width={72} />
         ```
+        <img width="312" alt="Screen Shot 2021-05-04 at 1 43 10 PM" src="https://user-images.githubusercontent.com/17462829/117049299-f4d2b200-ace1-11eb-8350-08c909463acd.png">
