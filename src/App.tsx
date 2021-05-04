@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StatsIndicator from "./components/StatsIndicator";
 import RadioGroup from "./components/RadioGroup";
 import Modal from "./components/Modal";
 import Pagination from "./components/Pagination";
+import Chip from "./components/Chip";
+import MultiSelect, { OptionValue } from "./components/MultiSelect";
 import { CursorClickIcon } from "@heroicons/react/outline";
 
 const plans = [
@@ -25,17 +27,40 @@ const plans = [
   },
 ];
 
+const multiSelectOptions = [
+  {value: '1', display: 'Option 1 Plus more text'},
+  {value: '2', display: 'Option 2'},
+  {value: '3', display: 'Option 3'},
+  {value: '4', display: 'Option 4'},
+  {value: '5', display: 'Option 5'},
+  {value: '6', display: 'Option 6'},
+  {value: '7', display: 'Option 7'},
+  {value: '8', display: 'Option 8'},
+];
+
 function App() {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const [selectedValues, setSelectedValues] = useState<OptionValue[]>(['1']);
   const closeModal = () => setOpen(false);
   const openModal = () => setOpen(true);
+  const onMultiSelectChange = (values: OptionValue[]) => setSelectedValues(values);
+
+  useEffect(() => {
+    console.log('selectedValues', selectedValues)
+  }, [selectedValues]);
 
   return (
     <div className="flex flex-col justify-center items-center py-10 bg-gray-500">
       <span className="text-green-400 text-2xl font-bold">
         Widgets examples
       </span>
+      <div className="mt-10 w-80 justify-center flex">
+        <MultiSelect onChange={onMultiSelectChange} options={multiSelectOptions} defaultValues={['1']} width={72} />
+      </div>
+      <div className="mt-10 w-64">
+        <Chip label="test" value="test" onClear={() => console.log('cleared')} onClick={() => console.log('clicked')}/>
+      </div>
       <div className="mt-10 w-64">
         <StatsIndicator
           name="Total Subscribers"
@@ -72,6 +97,10 @@ function App() {
       <div className="mt-10 w-80 justify-center flex">
         <Pagination page={page} total={9} setPage={setPage} />
       </div>
+      {/* Example for multi select with no bottom space available */}
+      {/* <div className="mt-10 w-80 justify-center flex">
+        <MultiSelect onChange={onMultiSelectChange} options={multiSelectOptions} defaultValues={['1']} width={80} />
+      </div> */}
     </div>
   );
 }

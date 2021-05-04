@@ -11,7 +11,7 @@ interface ChipProps {
   paddingY?: number;
 }
 
-const Chip = ({ label, onClick, onClear, value, borderColor = 'current', textColor = 'current', paddingX = 3, paddingY = 1 }: ChipProps) => (
+const Chip = ({ label, onClick, onClear, value, borderColor = 'current', textColor = 'current', paddingX = 2, paddingY = 1 }: ChipProps) => (
   <div
     className={`flex w-max justify-center items-center cursor-pointer m-1 font-medium py-${paddingY} px-${paddingX} bg-white rounded-2xl bg-gray-100 border focus:outline-none ${
       !!onClick ? "hover:bg-gray-200" : ""

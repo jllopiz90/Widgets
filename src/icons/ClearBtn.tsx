@@ -1,18 +1,14 @@
-interface ClearBtnProps {
-  onClick: () => void;
-  color?: string;
-  size?: number;
-  marginX?: number;
-}
+import { IconBtnProps } from './interfaces';
 
 export const ClearBtn = ({
   onClick,
   color = "black",
   size = 4,
   marginX = 0,
-}: ClearBtnProps) => (
+  padding = 1,
+}: IconBtnProps) => (
   <button
-    className={`mx-${marginX} p-1 focus:outline-none active:bg-gray-300 hover:bg-gray-300 rounded-full`}
+    className={`mx-${marginX} p-${padding} focus:outline-none active:bg-gray-300 hover:bg-gray-300 rounded-full`}
     onClick={(event) => {
       onClick();
       event.stopPropagation();
