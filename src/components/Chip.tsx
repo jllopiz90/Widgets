@@ -1,24 +1,29 @@
-import ClearBtb from "./ClearBtn";
+import ClearBtb from "../icons/ClearBtn";
 
 interface ChipProps {
   label: string;
   onClick?: () => void;
-  onClear?: () => void;
+  onClear?: (value: string | number | boolean) => void;
+  value?: string | number | boolean;
+  borderColor?: string;
+  textColor?: string;
+  paddingX?: number;
+  paddingY?: number;
 }
 
-const Chip = ({ label, onClick, onClear }: ChipProps) => (
-  <button
-    className={`flex justify-center items-center m-1 font-medium py-1 px-3 bg-white rounded-2xl bg-gray-100 border focus:outline-none ${
+const Chip = ({ label, onClick, onClear, value, borderColor = 'current', textColor = 'current', paddingX = 3, paddingY = 1 }: ChipProps) => (
+  <div
+    className={`flex w-max justify-center items-center cursor-pointer m-1 font-medium py-${paddingY} px-${paddingX} bg-white rounded-2xl bg-gray-100 border focus:outline-none ${
       !!onClick ? "hover:bg-gray-200" : ""
-    }`}
+    } border-${borderColor} text-${textColor}`}
     onClick={onClick || (() => {})}
-    disabled={!onClick}
+    // disabled={!onClick}
   >
     {label}
     <span className="ml-1 mt-0.5">
-      {!!onClear && <ClearBtb onClick={onClear} size={3} />}
+      {!!onClear && value && <ClearBtb onClick={() => onClear(value)} size={3} />}
     </span>
-  </button>
+  </div>
 );
 
 export default Chip;
