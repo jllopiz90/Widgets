@@ -64,6 +64,8 @@ function App() {
                     your an email with all of the details of your order."
             title="Payment successful"
             dismissText="Got it, thanks"
+            acceptText="Ok do it!"
+            onAccept={closeModal}
           />
         )}
       </div>
