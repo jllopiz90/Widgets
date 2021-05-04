@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { ArrowSmLeftIcon, ArrowSmRightIcon } from "@heroicons/react/solid";
 
 interface PaginationProps {
@@ -15,9 +14,6 @@ const Pagination = ({ page, setPage, total }: PaginationProps) => {
   const show2ToRight = () => page < total - 2 && total > 3;
   const showRightDots = () => page + 2 < total - 1;
 
-  useEffect(() => {
-    console.log("page is:", page);
-  }, [page]);
   return (
     <nav
       className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px ml-10 h-10"
