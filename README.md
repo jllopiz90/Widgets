@@ -148,3 +148,40 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
         ```
 
       <img width="437" alt="Screen Shot 2021-04-29 at 10 56 13 AM" src="https://user-images.githubusercontent.com/17462829/116572591-1abf1780-a8da-11eb-8807-3cd65e3b8cf3.png">
+
+    1. `MultiSelect`: Component to choose multiple options in a dropdown.
+        *Props:
+
+        ```typescript
+        type OptionValue = string | number | boolean;
+
+        interface MultiSelectOptions {
+          value: OptionValue;
+          display: string;
+        }
+
+        interface MultiSelectProps {
+          defaultValues?: OptionValue[];
+          options: MultiSelectOptions[];
+          onChange: (values: OptionValue[]) => void;
+          width?: string | number;
+          placeHolder?: string;
+        }
+        ```
+
+        *Example:
+
+        ```typescript
+        const multiSelectOptions = [
+          {value: '1', display: 'Option 1 Plus more text'},
+          {value: '2', display: 'Option 2'},
+          {value: '3', display: 'Option 3'},
+          {value: '4', display: 'Option 4'},
+          {value: '5', display: 'Option 5'},
+          {value: '6', display: 'Option 6'},
+          {value: '7', display: 'Option 7'},
+          {value: '8', display: 'Option 8'},
+        ];
+        const [selectedValues, setSelectedValues] = useState<OptionValue[]>(['1']);
+        <MultiSelect onChange={onMultiSelectChange} options={multiSelectOptions} defaultValues={['1']} width={72} />
+        ```
