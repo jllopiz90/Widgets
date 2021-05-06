@@ -17,6 +17,7 @@ interface MultiSelectProps {
   onChange: (values: OptionValue[]) => void;
   width?: string | number;
   placeHolder?: string;
+  clearOptionColor?: string;
 }
 
 const containsOption = (haystack: MultiSelectOptions[], needle: OptionValue) =>
@@ -40,6 +41,7 @@ const SelectionsContainer = ({
   clearAll,
   open,
   close,
+  clearOptionColor = 'rgba(199, 99, 174, 0.8)',
 }: {
   width: string | number;
   placeHolder: string;
@@ -50,6 +52,7 @@ const SelectionsContainer = ({
   clearAll: () => void;
   open: () => void;
   close: () => void;
+  clearOptionColor?: string;
 }) => (
   <div
     className={`my-2 p-1 flex border border-gray-200 bg-white rounded w-${width}`}
@@ -76,8 +79,8 @@ const SelectionsContainer = ({
         <Chip
           label="Clear All"
           onClick={clearAll}
-          borderColor="red-400"
-          textColor="red-400"
+          borderColor={clearOptionColor}
+          textColor={clearOptionColor}
           paddingX={6}
         />
       )}
@@ -181,6 +184,7 @@ const MultiSelect = ({
   width = "auto",
   defaultValues = [],
   placeHolder = "Select an option",
+  clearOptionColor = 'rgba(199, 99, 174, 0.8)',
 }: MultiSelectProps) => {
   const [isOpen, setShow] = useState(false);
   const [selected, setSelected] = useState(() => defaultValues);
@@ -193,7 +197,7 @@ const MultiSelect = ({
     setSelected(newSelected);
     onChange(newSelected);
   }
-  
+
   const onClearAll = () => {
     close();
     setSelected([]);
@@ -223,6 +227,7 @@ const MultiSelect = ({
           placeHolder={placeHolder}
           selected={selected}
           width={width}
+          clearOptionColor={clearOptionColor}
         />
         {isOpen ? <ListOptions options={options} selected={selected} onClick={onItemClick} /> : ""}
       </div>
