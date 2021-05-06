@@ -188,8 +188,12 @@ const MultiSelect = ({
   const open = () => setShow(true);
   const close = () => setShow(false);
 
-  const onClearChip = (chipValue: OptionValue) =>
-    setSelected(selected.filter((value) => value !== chipValue));
+  const onClearChip = (chipValue: OptionValue) => {
+    const newSelected = selected.filter((value) => value !== chipValue);
+    setSelected(newSelected);
+    onChange(newSelected);
+  }
+  
   const onClearAll = () => {
     close();
     setSelected([]);
