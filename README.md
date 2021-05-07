@@ -1,4 +1,4 @@
-# Introduction UI Widgets Components
+# Overview UI Widgets Components
 
 A small collection of UI widgets created with react, typescript and tailwindcss.
 
@@ -221,4 +221,5 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
           customInput={customInput()}
           customListOptionsPosition={30}
         />
-      ```
+      
+      <img width="236" alt="Screen Shot 2021-05-07 at 2 05 17 PM" src="https://user-images.githubusercontent.com/17462829/117495864-2f3b8980-af44-11eb-8344-3423fe1ee61f.png">
