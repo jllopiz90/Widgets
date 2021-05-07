@@ -5,7 +5,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
 ## Widgets
 
 1. `StatsIndicator`: Component to show a given stat, may display an icon or not.\
-    *Props:
+    **Props:**
 
    ```typescript
     interface StatsIndicatorProps { 
@@ -19,7 +19,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
     }
     ```
 
-    *Example:
+    **Example:**
     
     ```typescript
         <StatsIndicator
@@ -34,7 +34,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
    <img width="292" alt="Screen Shot 2021-04-28 at 5 44 48 PM" src="https://user-images.githubusercontent.com/17462829/116476592-6fff1880-a849-11eb-8694-dc0a440f3ded.png">
 
 1. `RadioGroup`: Component to present some choices to the user to choose 1 among all.
-    *Props:
+    **Props:**
 
     ```typescript
     interface GroupElement {
@@ -51,7 +51,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
     }
     ```
 
-    *Example:
+    **Example:**
 
     ```typescript
     const plans = [
@@ -86,7 +86,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
    <img width="394" alt="Screen Shot 2021-04-28 at 7 56 35 PM" src="https://user-images.githubusercontent.com/17462829/116487106-3801d080-a85d-11eb-9791-e5e57168a957.png">
 
 1. `Modal`: Component to display a modal dialog with info.
-    *Props:
+    **Props:**
 
     ```typescript
     interface ModalProps {
@@ -98,7 +98,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
     }
     ```
 
-    *Example:
+    **Example:**
 
     ```typescript
     const [open, setOpen] = useState(false);
@@ -129,7 +129,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
     <img width="520" alt="Screen Shot 2021-04-29 at 12 23 12 AM" src="https://user-images.githubusercontent.com/17462829/116502559-cdaf5700-a881-11eb-8a21-511199c757dd.png">
 
     1. `Pagination`: Component to navigate through pages.
-        *Props:
+        **Props:**
 
         ```typescript
         interface PaginationProps {
@@ -139,7 +139,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
         }
         ```
 
-        *Example:
+        **Example:**
 
         ```typescript
         const [page, setPage] = useState(1);
@@ -150,7 +150,7 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
       <img width="437" alt="Screen Shot 2021-04-29 at 10 56 13 AM" src="https://user-images.githubusercontent.com/17462829/116572591-1abf1780-a8da-11eb-8807-3cd65e3b8cf3.png">
 
     1. `MultiSelect`: Component to choose multiple options in a dropdown.
-        *Props:
+        **Props:**
 
         ```typescript
         type OptionValue = string | number | boolean;
@@ -166,10 +166,14 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
           onChange: (values: OptionValue[]) => void;
           width?: string | number;
           placeHolder?: string;
+          clearOptionColor?: string;
+          customInput?: JSX.Element;
+          customListOptionsPosition?: number;
+          maxInputHeight?: number;
         }
         ```
 
-        *Example:
+        **Example:**
 
         ```typescript
         const multiSelectOptions = [
@@ -186,3 +190,35 @@ A small collection of UI widgets created with react, typescript and tailwindcss.
         <MultiSelect onChange={onMultiSelectChange} options={multiSelectOptions} defaultValues={['1']} width={72} />
         ```
         <img width="312" alt="Screen Shot 2021-05-04 at 1 43 10 PM" src="https://user-images.githubusercontent.com/17462829/117049299-f4d2b200-ace1-11eb-8350-08c909463acd.png">
+
+        **Example with custom input:**
+
+        ```typescript
+        const customInput = () => (
+          <div className="relative">
+            <input
+              name="customInput"
+              className="truncate block mt-1 w-full pl-2 pr-6 py-1 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+              value={multiSelectOptions
+                .filter((option) =>
+                  selectedValues.some((selected) => selected === option.value)
+                )
+                .map((option) => option.display)
+                .join(", ")}
+              placeholder="Select"
+              readOnly
+            />
+            <div className="absolute top-0 right-0 text-gray-300 w-8 pl-0.5 border-l flex justify-center items-center border-gray-200">
+              <ChevronDownBtn size={5} onClick={() => {}} />
+            </div>
+          </div>
+        );
+        <MultiSelect
+          onChange={onMultiSelectChange}
+          options={multiSelectOptions}
+          defaultValues={["1"]}
+          width={72}
+          customInput={customInput()}
+          customListOptionsPosition={30}
+        />
+      ```

@@ -18,6 +18,9 @@ interface MultiSelectProps {
   width?: string | number;
   placeHolder?: string;
   clearOptionColor?: string;
+  customInput?: JSX.Element;
+  customListOptionsPosition?: number;
+  maxInputHeight?: number;
 }
 
 const containsOption = (haystack: MultiSelectOptions[], needle: OptionValue) =>
@@ -41,7 +44,8 @@ const SelectionsContainer = ({
   clearAll,
   open,
   close,
-  clearOptionColor = 'rgba(199, 99, 174, 0.8)',
+  clearOptionColor = "rgba(199, 99, 174, 0.8)",
+  maxHeight = 24,
 }: {
   width: string | number;
   placeHolder: string;
@@ -53,11 +57,12 @@ const SelectionsContainer = ({
   open: () => void;
   close: () => void;
   clearOptionColor?: string;
+  maxHeight?: number;
 }) => (
   <div
     className={`my-2 p-1 flex border border-gray-200 bg-white rounded w-${width}`}
   >
-    <div className="flex flex-auto flex-wrap mr-1 max-h-24 overflow-y-scroll">
+    <div className={`flex flex-auto flex-wrap mr-1 max-h-${maxHeight} overflow-y-scroll`}>
       {selected.length === 0 ? (
         <span className="flex items-center bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800">
           {placeHolder}
@@ -139,14 +144,18 @@ const ListOptions = ({
   selected,
   listId = "listbox",
   onClick,
+  customTopPosition,
 }: {
   options: MultiSelectOptions[];
   selected: OptionValue[];
   listId?: string;
   onClick: (val: OptionValue) => void;
+  customTopPosition?: number;
 }) => {
-  const [topPosition, setTopPosition] = useState(() =>
-    selected.length > 2 ? 110 : 60
+  const [topPosition, setTopPosition] = useState(
+    () =>
+      (Number.isInteger(customTopPosition) && customTopPosition) ||
+      (selected.length > 2 ? 110 : 60)
   );
   const { height } = useWindowDimensions();
 
@@ -172,7 +181,12 @@ const ListOptions = ({
       }}
     >
       {options.map(({ value, display }, index) => (
-        <ListItem label={display} selected={selected.includes(value)} onClick={() => onClick(value)} key={`item_${index}`} />
+        <ListItem
+          label={display}
+          selected={selected.includes(value)}
+          onClick={() => onClick(value)}
+          key={`item_${index}`}
+        />
       ))}
     </ul>
   );
@@ -184,7 +198,10 @@ const MultiSelect = ({
   width = "auto",
   defaultValues = [],
   placeHolder = "Select an option",
-  clearOptionColor = 'rgba(199, 99, 174, 0.8)',
+  clearOptionColor = "rgba(199, 99, 174, 0.8)",
+  customInput,
+  customListOptionsPosition,
+  maxInputHeight = 24,
 }: MultiSelectProps) => {
   const [isOpen, setShow] = useState(false);
   const [selected, setSelected] = useState(() => defaultValues);
@@ -196,40 +213,54 @@ const MultiSelect = ({
     const newSelected = selected.filter((value) => value !== chipValue);
     setSelected(newSelected);
     onChange(newSelected);
-  }
+  };
 
   const onClearAll = () => {
     close();
     setSelected([]);
   };
-  
+
   const onItemClick = (val: OptionValue) => {
-      if (!selected.includes(val)) {
-        setSelected([...selected, val]);
-        onChange([...selected, val]);
-      } else {
-        const filtered = selected.filter((item) => item !== val);
-        setSelected(filtered);
-        onChange(filtered);
-      }
-  }
-  
+    if (!selected.includes(val)) {
+      setSelected([...selected, val]);
+      onChange([...selected, val]);
+    } else {
+      const filtered = selected.filter((item) => item !== val);
+      setSelected(filtered);
+      onChange(filtered);
+    }
+  };
+
   return (
     <OutsideAlerter onClick={close}>
       <div className="mt-1 relative">
-        <SelectionsContainer
-          open={open}
-          close={close}
-          isOpen={isOpen}
-          onClearChip={onClearChip}
-          clearAll={onClearAll}
-          options={options}
-          placeHolder={placeHolder}
-          selected={selected}
-          width={width}
-          clearOptionColor={clearOptionColor}
-        />
-        {isOpen ? <ListOptions options={options} selected={selected} onClick={onItemClick} /> : ""}
+        {!customInput ? (
+          <SelectionsContainer
+            open={open}
+            close={close}
+            isOpen={isOpen}
+            onClearChip={onClearChip}
+            clearAll={onClearAll}
+            options={options}
+            placeHolder={placeHolder}
+            selected={selected}
+            width={width}
+            clearOptionColor={clearOptionColor}
+            maxHeight={maxInputHeight}
+          />
+        ) : (
+          <div onClick={() => setShow(!isOpen)}>{customInput}</div>
+        )}
+        {isOpen ? (
+          <ListOptions
+            options={options}
+            selected={selected}
+            onClick={onItemClick}
+            customTopPosition={customListOptionsPosition}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </OutsideAlerter>
   );

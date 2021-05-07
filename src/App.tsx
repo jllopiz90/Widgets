@@ -5,6 +5,7 @@ import Modal from "./components/Modal";
 import Pagination from "./components/Pagination";
 import Chip from "./components/Chip";
 import MultiSelect, { OptionValue } from "./components/MultiSelect";
+import { ChevronDownBtn } from "./icons";
 import { CursorClickIcon } from "@heroicons/react/outline";
 
 const plans = [
@@ -28,27 +29,48 @@ const plans = [
 ];
 
 const multiSelectOptions = [
-  {value: '1', display: 'Option 1 Plus more text'},
-  {value: '2', display: 'Option 2'},
-  {value: '3', display: 'Option 3'},
-  {value: '4', display: 'Option 4'},
-  {value: '5', display: 'Option 5'},
-  {value: '6', display: 'Option 6'},
-  {value: '7', display: 'Option 7'},
-  {value: '8', display: 'Option 8'},
+  { value: "1", display: "Option 1 Plus more text" },
+  { value: "2", display: "Option 2" },
+  { value: "3", display: "Option 3" },
+  { value: "4", display: "Option 4" },
+  { value: "5", display: "Option 5" },
+  { value: "6", display: "Option 6" },
+  { value: "7", display: "Option 7" },
+  { value: "8", display: "Option 8" },
 ];
 
 function App() {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
-  const [selectedValues, setSelectedValues] = useState<OptionValue[]>(['1']);
+  const [selectedValues, setSelectedValues] = useState<OptionValue[]>(["1"]);
   const closeModal = () => setOpen(false);
   const openModal = () => setOpen(true);
-  const onMultiSelectChange = (values: OptionValue[]) => setSelectedValues(values);
+  const onMultiSelectChange = (values: OptionValue[]) =>
+    setSelectedValues(values);
 
   useEffect(() => {
-    console.log('selectedValues', selectedValues)
+    console.log("selectedValues", selectedValues);
   }, [selectedValues]);
+
+  const customInput = () => (
+    <div className="relative">
+      <input
+        name="customInput"
+        className="truncate block mt-1 w-full pl-2 pr-6 py-1 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+        value={multiSelectOptions
+          .filter((option) =>
+            selectedValues.some((selected) => selected === option.value)
+          )
+          .map((option) => option.display)
+          .join(", ")}
+        placeholder="Select"
+        readOnly
+      />
+      <div className="absolute top-0 right-0 text-gray-300 w-8 pl-0.5 border-l flex justify-center items-center border-gray-200">
+        <ChevronDownBtn size={5} onClick={() => {}} />
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex flex-col justify-center items-center py-10 bg-gray-500">
@@ -56,10 +78,31 @@ function App() {
         Widgets examples
       </span>
       <div className="mt-10 w-80 justify-center flex">
-        <MultiSelect onChange={onMultiSelectChange} options={multiSelectOptions} defaultValues={['1']} width={72} />
+        <MultiSelect
+          onChange={onMultiSelectChange}
+          options={multiSelectOptions}
+          defaultValues={["1"]}
+          width={80}
+          // maxInputHeight={10}
+        />
       </div>
+      {/* <div className="mt-10 w-80 justify-center flex">
+        <MultiSelect
+          onChange={onMultiSelectChange}
+          options={multiSelectOptions}
+          defaultValues={["1"]}
+          width={72}
+          customInput={customInput()}
+          customListOptionsPosition={30}
+        />
+      </div> */}
       <div className="mt-10 w-64">
-        <Chip label="test" value="test" onClear={() => console.log('cleared')} onClick={() => console.log('clicked')}/>
+        <Chip
+          label="test"
+          value="test"
+          onClear={() => console.log("cleared")}
+          onClick={() => console.log("clicked")}
+        />
       </div>
       <div className="mt-10 w-64">
         <StatsIndicator
@@ -99,7 +142,13 @@ function App() {
       </div>
       {/* Example for multi select with no bottom space available */}
       {/* <div className="mt-10 w-80 justify-center flex">
-        <MultiSelect onChange={onMultiSelectChange} options={multiSelectOptions} defaultValues={['1']} width={80} />
+        <MultiSelect
+          onChange={onMultiSelectChange}
+          options={multiSelectOptions}
+          defaultValues={["1"]}
+          width={80}
+          customInput={customInput()}
+        />
       </div> */}
     </div>
   );
